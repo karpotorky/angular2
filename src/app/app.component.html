@@ -1,0 +1,32 @@
+<md-sidenav-layout [class.m2app-dark]="isDarkTheme">
+  <md-toolbar color="primary">
+    Toive testi
+    <span class="app-toolbar-filler"></span>
+    testi
+  </md-toolbar>
+
+  <div class="app-content">
+    <md-card>
+      <md-input #nimiField placeholder="Nimi" maxlength="15">
+        <md-hint align="end">
+          {{nimiField.characterCount}} / 15
+        </md-hint>
+      </md-input>
+
+       <md-input #toiveField placeholder="Toive" maxlength="50">
+        <md-hint align="end">
+          {{toiveField.characterCount}} / 50
+        </md-hint>
+      </md-input>
+      <br/>
+      <button (click)="onSubmit(nimiField.value, toiveField.value)" md-raised-button color="primary">Lisää toive!</button>
+
+    </md-card>
+    <br/>
+    <br/>
+    <md-card *ngFor="let item of items">
+      <md-input (keyup)="onChangeNimi($event, item)" placeholder="Kuka?" value="{{ item.nimi }}" maxlength="15"></md-input>
+      <md-input (keyup)="onChangeToive($event, item)" placeholder="Toive" value="{{ item.toive }}" maxlength="50"></md-input>
+      <md-checkbox (change)="onCheck($event, item)" [checked]="item.isChecked">Huomioitu</md-checkbox>
+      <button (click)="onDelete(item)" md-raised-button color="accent">POISTA</button>
+    </md-card>
